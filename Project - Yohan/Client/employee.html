@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="app.js"></script>
+        <title>editEmp</title>
+    </head>
+
+
+
+    <body onload="getEmpID();navBar();showName()">
+        <span id="showN"></span>
+        <span id="nactions"></span>
+
+        <br>
+
+        <table border="1" id='navBar'></table>
+
+        <h1>Edit Employee</h1>
+
+        <br>
+        First Name : <input type="text" id="fname">    <br> 
+        Last Name : <input type="text" id="lname">    <br> 
+        Age :  <select name="depa" id="depa"><option value="">---Select a Department---</option></select>   <br>
+        
+
+        <input type="button" value="Update" onclick="updateEmp()">
+    
+        <br>
+    
+        <button onclick="logout()">Logout</button>
+
+    </body>
+</html>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="factoryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="manager" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="startWorkYear" Type="int" Nullable="false" />
+    <Property Name="departmentID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="employee_shift">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeid" Type="int" Nullable="false" />
+    <Property Name="shiftid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="shift">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="startTime" Type="int" Nullable="false" />
+    <Property Name="endTime" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="full_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="numOfActions" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_department_employee">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="department" Type="Self.department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="department">
+        <PropertyRef Name="manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employee_shift_employee">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="employee_shift" Type="Self.employee_shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="employee_shift">
+        <PropertyRef Name="employeeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_employee_shift_shift">
+    <End Role="shift" Type="Self.shift" Multiplicity="1" />
+    <End Role="employee_shift" Type="Self.employee_shift" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shift">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="employee_shift">
+        <PropertyRef Name="shiftid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="factoryDBModelStoreContainer">
+    <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employee_shift" EntityType="Self.employee_shift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shift" EntityType="Self.shift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_department_employee" Association="Self.FK_department_employee">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="department" EntitySet="department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employee_shift_employee" Association="Self.FK_employee_shift_employee">
+      <End Role="employee" EntitySet="employee" />
+      <End Role="employee_shift" EntitySet="employee_shift" />
+    </AssociationSet>
+    <AssociationSet Name="FK_employee_shift_shift" Association="Self.FK_employee_shift_shift">
+      <End Role="shift" EntitySet="shift" />
+      <End Role="employee_shift" EntitySet="employee_shift" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

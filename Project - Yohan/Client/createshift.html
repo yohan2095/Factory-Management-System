@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="app.js"></script>
+    <title> Create a New Shift</title>
+</head>
+<body onload="navBar();showName()">
+    <span id="showN"></span>
+    <span id="nactions"></span>
+
+    <br>
+
+    <table border="1" id='navBar'></table>
+
+    <h1>Create a New Shift</h1>  <br>
+
+    Date : <input type="date" id="dateT">            <br>
+    Start Hour : <input type="number" id="startT">   <br>
+    End Hour : <input type="number" id="endT">       <br>
+
+    <button onclick="createNewShift()">Create</button>
+
+    <button onclick="logout()">Logout</button>
+</body>
+</html>

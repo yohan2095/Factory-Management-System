@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Department</title>
+    <script src="app.js"></script>
+</head>
+
+
+<body onload="loadDepartment();navBar();showName()">
+    <span id="showN"></span>
+    <span id="nactions"></span>
+
+    <br>
+
+    <table border="1" id='navBar'></table>
+
+    <h1>Department</h1>
+
+    <table border="1" id="tbl">
+        <tr>
+            <th>Depart Name</th><th>Manager</th><th>Options</th>
+        </tr>
+    </table>
+
+    <br>
+
+    <button onclick="gotoAddDep()" id="gotoAddDep">Add a new Department</button>
+
+    <br>
+
+    <button onclick="logout()">Logout</button>
+</body>
+</html>
