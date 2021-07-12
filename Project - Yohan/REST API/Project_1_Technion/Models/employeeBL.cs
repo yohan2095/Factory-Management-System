@@ -76,10 +76,19 @@ namespace Project_1_Technion.Models
         //DELETE
         public void DeleteEmp(int id)
         {
+            var eid = db.employees.Where(d => d.ID == id).First();
+            db.employees.Remove(eid);
+
+
+            var sid = db.employee_shift.Where(x => x.employeeid == id);
             
-            employee s = db.employees.Where(x => x.ID == id).First();
-            db.employees.Remove(s);
+            foreach (var x in sid)
+            {
+                db.employee_shift.Remove(x);
+            };
+
             
+
             db.SaveChanges();
         }
 

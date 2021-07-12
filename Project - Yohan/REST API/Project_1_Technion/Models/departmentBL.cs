@@ -11,20 +11,20 @@ namespace Project_1_Technion.Models
 
         public List<DepWithEmp> GetDepDatas()
         {
-            var result = from department in db.departments
+            var result = from dep in db.departments
                          join emp in db.employees
-                         on department.manager equals emp.ID
+                         on dep.manager equals emp.ID
                          select new DepWithEmp
                          {
-                             ID = department.ID,
-                             name = department.name,
-                             manager = department.manager,
+                             ID = dep.ID,
+                             name = dep.name,
+                             manager = dep.manager,
                              fname = emp.fname,
                              lname = emp.lname,
                              departmentID = emp.departmentID,
-                             empexist = true,
+                             
+                             
                          };
-
             return result.ToList();
         }
 
@@ -41,7 +41,6 @@ namespace Project_1_Technion.Models
                              fname = emp.fname,
                              lname = emp.lname,
                              departmentID = emp.departmentID,
-                             empexist = true,
                          };
 
             return result.Where(x => x.ID == id).First();

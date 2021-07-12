@@ -17,6 +17,6 @@ namespace Project_1_Technion.Models
         public string lname { get; set; }
         public int departmentID { get; set; }
 
-        public bool empexist { get; set; }
+        
     }
 }
