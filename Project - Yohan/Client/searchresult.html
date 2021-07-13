@@ -1,19 +1,17 @@
+<!DOCTYPE html>
 <html>
-
 <head>
     <script src="app.js"></script>
-    <title>Add a New Department</title>
+    <title>Search Results</title>
 </head>
-<body onload="loadEmployees();navBar();showName()">
+<body onload="navBar();showName();ShowResult()">
     <span id="showN"></span>
     <span id="nactions"></span> <br>
     <table border="1" id='navBar'></table>
 
-    <h1>Employees</h1>
+    <h1>Search Result:</h1>  
 
-    <input type=text id="searchTXT"> <button onclick="sendSearch()">Search</button>
-
-    <table border="1" id="tbl2">
+    <table border="1" id="tblR">
         <tr>
             <th>Full Name</th>
             <th>Department</th>
@@ -24,10 +22,9 @@
             <th>Options</th>
         </tr>
     </table>
-    
 
-    <br>
+    <button onclick="backB()">Back</button>
 
-    <button onclick="logout()">Logout</button>
+
 </body>
 </html>

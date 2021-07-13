@@ -46,14 +46,14 @@ namespace Project_1_Technion.Models
             return result.Where(x => x.ID == id).First();
         }
 
-        public void UpdateDepData(int id, department s, employee z)
+        public void UpdateDepData(int id, department depo)
         {
             department dep = db.departments.Where(x => x.ID == id).First();
-            dep.name = s.name;
-            dep.manager = s.manager;
+            dep.name = depo.name;
+            dep.manager = depo.manager;
 
-            employee emp = db.employees.Where(x => x.ID == id).First();
-            emp.departmentID = z.departmentID;
+            //employee emp = db.employees.Where(x => x.ID == id).First();
+            //emp.departmentID = emplo.departmentID;
             
 
             db.SaveChanges();

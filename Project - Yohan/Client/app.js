@@ -93,8 +93,7 @@ function changeacess()
             localStorage.setItem("access", false);
             var now = new Date();
             var endDate = new Date();
-            //endDate.setDate(endDate.getDate() + 1);
-            endDate.setMinutes(endDate.getMinutes() + 2);
+            endDate.setDate(endDate.getDate() + 1);
             localStorage.setItem("nows", now);
             localStorage.setItem("endDates", endDate);
         }
@@ -200,7 +199,6 @@ async function loadDepartment()
                 if(clicked = true)
                 {   
                     window.location.href = "department.html?DepWithEmpID=" + DepWithEmp.ID
-                    ActionTracker()
                 }
             };
             
@@ -455,6 +453,159 @@ async function loadEmployees()
     }
 
 
+/////-------------------------------------------------memorize search input @employees.html------------------------------------------------/////
+async function sendSearch()
+{
+    //takes the user's input and set it a a sessionStorage item
+    let input = document.getElementById("searchTXT").value;
+    sessionStorage.setItem("SearchInput", input);
+ 
+    //redirects to "searchresult.html"
+    window.location.href = "searchresult.html";
+}
+
+/////---------------------------------------------check and load search result @searchresult.html------------------------------------------/////
+async function ShowResult()
+{
+   let Cinput = sessionStorage.getItem("SearchInput");
+   let resp = await fetch("https://localhost:44340/api/employee");
+   let data = await resp.json();
+
+   //"no result" counter, if noresult = ExtendEmp.length, it means no results were found
+   let noresult = 0;
+
+    data.forEach((ExtendEmp) => {
+    
+    //verifies results
+    if((Cinput.toLowerCase() == ExtendEmp.fname.toLowerCase()) || (Cinput.toLowerCase() == ExtendEmp.lname.toLowerCase()) || (Cinput.toLowerCase() == ExtendEmp.name.toLowerCase()))
+    {
+        //creates td object.
+        let tdFullnameObj = document.createElement("td");
+        let tdDepaObj = document.createElement("td");
+        let tdStartYearObj = document.createElement("td");
+        let tdShiftidObj = document.createElement("td");
+        let tdHoursObj = document.createElement("td");
+        let tdDateObj = document.createElement("td");
+
+        //inserts requested data on every td object.
+        tdFullnameObj.innerText = ExtendEmp.fname + " " + ExtendEmp.lname;
+        tdDepaObj.innerText = ExtendEmp.name;
+        tdStartYearObj.innerText = ExtendEmp.startWorkYear;
+
+        //create ul objects for shift data.
+        let ulShiftidObj = document.createElement("ul");
+        let ulHoursObj = document.createElement("ul");
+        let ulDateObj = document.createElement("ul");
+
+        //for each ExtendEmp element, create a list of shift data.
+        for (let i = 0; i < ExtendEmp.ExtendShiftz.length; i++)
+        {
+            //creates li objects.
+            let liShiftidObj = document.createElement("li");
+            let liHoursObj = document.createElement("li");
+            let liDateObj = document.createElement("li");
+
+            //insert requested data inside every li object.
+            liShiftidObj.innerText = ExtendEmp.ExtendShiftz[i].shiftid;
+            liHoursObj.innerText = ExtendEmp.ExtendShiftz[i].startTime + ":00 -" + ExtendEmp.ExtendShiftz[i].endTime + ":00";
+            liDateObj.innerText = ExtendEmp.ExtendShiftz[i].date;
+
+            //put every li object inside its related ul object.
+            ulShiftidObj.appendChild(liShiftidObj);
+            ulHoursObj.appendChild(liHoursObj);
+            ulDateObj.appendChild(liDateObj);
+
+            //put every ul object inside its related td object.
+            tdShiftidObj.appendChild(ulShiftidObj);
+            tdHoursObj.appendChild(ulHoursObj);
+            tdDateObj.appendChild(ulDateObj);
+
+            //EDIT Button and function.
+            tdEditObj = document.createElement("button");
+            tdEditObj.innerHTML = "Edit";
+            var clicked = false;
+            tdEditObj.onclick = function editID()
+            {
+                clicked = true;
+                if(clicked = true)
+                {
+                    window.location.href = "employee.html?ExtendEmp=" + ExtendEmp.ID
+                    ActionTracker()
+                }
+            };
+
+            //DELETE Button and function.
+            tdDeleteObj = document.createElement("button");
+            tdDeleteObj.innerHTML = "Delete";
+            var clicked1 = false;
+            tdDeleteObj.onclick = async function deleteDep()
+            {
+                clicked1 = true;
+                if(clicked1 = true)
+                {
+                    let fectParams = { method : 'DELETE',  
+                                       headers : { "Content-Type" : "application/json"} 
+                                     };
+
+                    let resp = await fetch("https://localhost:44340/api/employee/" + ExtendEmp.ID, fectParams);
+                    let status =  await resp.json();
+    
+                    window.location.href = "employees.html"
+                    ActionTracker()
+                }
+            };
+
+            //ADD Button and function.
+            tdAddSObj = document.createElement("button");
+            tdAddSObj.innerText = "Add new Shift";
+            var clicked2 = false;
+            tdAddSObj.onclick = function GotoAddShift()
+            {
+                clicked2 = true;
+                if(clicked2 = true)
+                {
+                    window.location.href = "addnewshift.html?ExtendEmp=" + ExtendEmp.ID;
+                }
+            };
+        };
+
+    //create a tr object for each ExtendEmp element.    
+    let trObjR = document.createElement("tr");
+
+    //insert all td's inside the tr object.
+    trObjR.appendChild(tdFullnameObj);
+    trObjR.appendChild(tdDepaObj);
+    trObjR.appendChild(tdStartYearObj);
+    trObjR.appendChild(tdShiftidObj);
+    trObjR.appendChild(tdHoursObj);
+    trObjR.appendChild(tdDateObj);
+    trObjR.appendChild(tdEditObj);   
+    trObjR.appendChild(tdDeleteObj);   
+    trObjR.appendChild(tdAddSObj);  
+
+    document.getElementById('tblR').appendChild(trObjR);
+
+    }
+    else
+    {
+        noresult = noresult + 1;
+    }
+
+    }); 
+    
+    //verify and notifies if no result were found.
+    if(noresult == data.length)
+    {
+        alert("No Result Found");
+    }
+
+}
+
+async function backB()
+{
+    window.location.href = "employees.html";
+}
+
 
 /////---------------------------------------------------Load Employee per ID @employee.html------------------------------------------------/////
 async function getEmpID()
@@ -479,8 +630,8 @@ async function getEmpID()
 
                 let opDepObj = document.createElement("option");
 
-                opDepObj.innerText = DepWithEmp.departmentID + ") " + DepWithEmp.name;
-                opDepObj.value = DepWithEmp.departmentID;
+                opDepObj.innerText = DepWithEmp.ID + ") " + DepWithEmp.name;
+                opDepObj.value = DepWithEmp.ID;
 
                 document.getElementById('depa').appendChild(opDepObj);
             });

@@ -35,9 +35,9 @@ namespace Project_1_Technion.Controllers
         }
 
         // PUT: api/department/5
-        public string Put(int id, department s, employee z)
+        public string Put(int id, department depo)
         {
-            bl.UpdateDepData(id, s, z);
+            bl.UpdateDepData(id, depo);
             return "Updated";
         }
 
