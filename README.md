@@ -1,6 +1,6 @@
 # Factory-Management-System
 
-![Full Stack 1](https://user-images.githubusercontent.com/76798407/125389635-3484dc80-e3aa-11eb-9369-a5980d807924.png)
+![title](https://user-images.githubusercontent.com/76798407/125580935-4295c706-adf9-4b60-a57c-566ecb7fded0.png)
 
 
 This is my first Full Stack Project. On this project I need to create 4 main pages which are: "Login", "Departments", "Employees" and "Shifts".
@@ -11,7 +11,7 @@ Once a user is logged-in, His name and number of actions available are shown on 
 In addition to the CRUD operations on the employee page, we need to create a Search Box. This Search Box should be able to find an employee according
 his first name, last name or department.
 
-The website is linked to an .NET server which is connected to my SQL Server Data Base.
+The website is linked to a .NET server which is connected to my SQL Server Data Base.
 
 The languages i used for this project are:
 - HTML
@@ -23,17 +23,23 @@ Here's some screenshots from the project (July 13th 2021):
 
 Login:
 
-![loginproject](https://user-images.githubusercontent.com/76798407/125391967-fbe70200-e3ad-11eb-8b4d-a2b50748cc87.png)
+![loginproject](https://user-images.githubusercontent.com/76798407/125577523-02bcca9c-470c-4ab5-9bb8-09eb35723531.png)
 
 Departments:
 
-![depproject1](https://user-images.githubusercontent.com/76798407/125392310-9b0bf980-e3ae-11eb-8d38-1540efaea2fa.png)
+![depproject](https://user-images.githubusercontent.com/76798407/125577553-e96c5be0-cb01-484e-9431-d90cbc722cf3.png)
+
 
 Employees:
 
-![empproject1](https://user-images.githubusercontent.com/76798407/125392581-1372ba80-e3af-11eb-8a94-a0825186b570.png)
+![employeesproject](https://user-images.githubusercontent.com/76798407/125580394-4ffee5e1-4a4c-401a-90d9-bf41aeca1693.png)
+
+Search Result:
+
+![searrsltproject](https://user-images.githubusercontent.com/76798407/125580459-4ae2991a-17da-4a8f-8bef-b4554e15452b.png)
 
 Shifts:
 
-![shiftsproject](https://user-images.githubusercontent.com/76798407/125392919-ab70a400-e3af-11eb-867a-d8297551278b.png)
+![shiftproject](https://user-images.githubusercontent.com/76798407/125580502-a129ea1e-a85d-4709-b8a8-4acd447de71f.png)
+
 
